@@ -1,0 +1,58 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Home Memory",
+        "description": "Fügt ein themenbasiertes Gedächtnis hinzu, das KI-Assistenten über Aktionen und die LLM-API lesen und schreiben können."
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Home Memory ist bereits eingerichtet."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "index": { "name": "Themen" }
+    }
+  },
+  "exceptions": {
+    "invalid_topic": { "message": "Der Themenname ist leer oder ungültig." },
+    "unknown_topic": { "message": "Das Thema {topic} gibt es nicht." },
+    "nothing_to_restore": { "message": "Für das Thema {topic} gibt es keine vorherige Version." },
+    "content_too_long": { "message": "Der Inhalt ist länger als {max} Zeichen. Bitte auf mehrere Themen aufteilen." }
+  },
+  "services": {
+    "set": {
+      "name": "Thema setzen",
+      "description": "Legt ein Thema an oder ersetzt seinen Inhalt. Die vorherige Version bleibt für ein Rückgängig erhalten.",
+      "fields": {
+        "topic": { "name": "Thema", "description": "Themenname, z. B. energie oder pool." },
+        "content": { "name": "Inhalt", "description": "Das Wissen zu diesem Thema (Markdown oder YAML)." },
+        "refs": { "name": "Verweise", "description": "Entitäts-, Geräte- oder Bereichs-IDs, um die es in diesem Thema geht." },
+        "title": { "name": "Titel", "description": "Anzeigename. Standard ist der Themenname." }
+      }
+    },
+    "append": {
+      "name": "An Thema anhängen",
+      "description": "Hängt Text an ein Thema an. Legt das Thema an, falls es fehlt.",
+      "fields": {
+        "topic": { "name": "Thema", "description": "Themenname." },
+        "text": { "name": "Text", "description": "Anzuhängender Text." }
+      }
+    },
+    "delete": {
+      "name": "Thema löschen",
+      "description": "Löscht ein Thema und seinen Sensor.",
+      "fields": {
+        "topic": { "name": "Thema", "description": "Themenname." }
+      }
+    },
+    "restore": {
+      "name": "Letzte Änderung rückgängig",
+      "description": "Tauscht aktuellen und vorherigen Inhalt eines Themas.",
+      "fields": {
+        "topic": { "name": "Thema", "description": "Themenname." }
+      }
+    }
+  }
+}

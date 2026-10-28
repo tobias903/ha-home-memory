@@ -1,0 +1,58 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Home Memory",
+        "description": "Adds a topic-based memory that AI assistants can read and write through actions and the LLM API."
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Home Memory is already set up."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "index": { "name": "Topics" }
+    }
+  },
+  "exceptions": {
+    "invalid_topic": { "message": "The topic name is empty or invalid." },
+    "unknown_topic": { "message": "Topic {topic} does not exist." },
+    "nothing_to_restore": { "message": "Topic {topic} has no previous version." },
+    "content_too_long": { "message": "Content is longer than {max} characters. Split it into several topics." }
+  },
+  "services": {
+    "set": {
+      "name": "Set topic",
+      "description": "Creates a topic or replaces its content. The previous version is kept for one undo.",
+      "fields": {
+        "topic": { "name": "Topic", "description": "Topic name, e.g. energy or pool." },
+        "content": { "name": "Content", "description": "The knowledge for this topic (Markdown or YAML)." },
+        "refs": { "name": "References", "description": "Entity, device or area IDs this topic is about." },
+        "title": { "name": "Title", "description": "Display name. Defaults to the topic name." }
+      }
+    },
+    "append": {
+      "name": "Append to topic",
+      "description": "Adds text at the end of a topic. Creates the topic if it does not exist.",
+      "fields": {
+        "topic": { "name": "Topic", "description": "Topic name." },
+        "text": { "name": "Text", "description": "Text to append." }
+      }
+    },
+    "delete": {
+      "name": "Delete topic",
+      "description": "Deletes a topic and its sensor.",
+      "fields": {
+        "topic": { "name": "Topic", "description": "Topic name." }
+      }
+    },
+    "restore": {
+      "name": "Undo last change",
+      "description": "Swaps the current and the previous content of a topic.",
+      "fields": {
+        "topic": { "name": "Topic", "description": "Topic name." }
+      }
+    }
+  }
+}

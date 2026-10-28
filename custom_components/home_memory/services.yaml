@@ -1,0 +1,54 @@
+set:
+  fields:
+    topic:
+      required: true
+      example: energie
+      selector:
+        text:
+    content:
+      required: true
+      example: "PV hängt hinter Zähler 2, die Wärmepumpe läuft über Zähler 1."
+      selector:
+        text:
+          multiline: true
+    refs:
+      required: false
+      example: "sensor.solarnet_pv_leistung"
+      selector:
+        text:
+          multiple: true
+    title:
+      required: false
+      example: Energie
+      selector:
+        text:
+
+append:
+  fields:
+    topic:
+      required: true
+      example: pool
+      selector:
+        text:
+    text:
+      required: true
+      example: "Pool ist über den Winter außer Betrieb."
+      selector:
+        text:
+          multiline: true
+
+delete:
+  fields:
+    topic:
+      required: true
+      example: pool
+      selector:
+        text:
+
+restore:
+  fields:
+    topic:
+      required: true
+      example: pool
+      selector:
+        text:
